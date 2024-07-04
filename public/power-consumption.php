@@ -2,13 +2,12 @@
 session_start();
 require_once(__DIR__ . '/../config/configuration.php');
 require_once(__DIR__ . '/../config/validation.php');
-// session_start();
 
-function insertPowerConsumption($userId, $date, $consumption, $totalBill) {
+function insertPowerConsumption($userId, $userName, $date, $consumption, $totalBill) {
     global $conn;
-    $sql = "INSERT INTO power_consumption (user_id, date, consumption_kwh, total_bill) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO power_consumption (user_id, user_name, date, consumption_kwh, total_bill) VALUES (?, ?, ?, ?, ?)";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("isdd", $userId, $date, $consumption, $totalBill);
+        $stmt->bind_param("issdd", $userId, $userName, $date, $consumption, $totalBill);
         if ($stmt->execute()) {
             $stmt->close();
             return true;
@@ -23,14 +22,18 @@ function insertPowerConsumption($userId, $date, $consumption, $totalBill) {
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $userId = 1; // Replace with session user ID in real application
+    // Fetch user data from session
+    $userId = $_SESSION['user_id']; // Replace with your session user ID
+   $user_name = $_SESSION['user_name'];
+    
     $date = $_POST['date'];
     $consumption = $_POST['consumption'];
     $ratePerKwh = 12.0545; // Current rate per kWh in the Philippines
     $totalBill = $consumption * $ratePerKwh;
 
-    if (insertPowerConsumption($userId, $date, $consumption, $totalBill)) {
+    if (insertPowerConsumption($userId, $user_name, $date, $consumption, $totalBill)) {
         $message = "Your power consumption for $date: $consumption kWh. Total bill: PHP " . number_format($totalBill, 2);
+        $_SESSION['totalBill'] = $totalBill; // Store the total bill in session
         
         echo "<script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -39,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                       title: 'Success!',
                       text: '$message',
                       showConfirmButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'payment.php';
+                        }
                     });
                 });
               </script>";
@@ -68,6 +75,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 p-8">
+     <header class="bg-white shadow p-4 mb-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Power Consumption Calculator</h1>
+            <div>
+                <a href="transactions.php" class="text-blue-500 hover:underline mr-4">Transactions</a>
+                <form action="logout.php" method="POST" class="inline">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+</form>
+
     <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl font-bold mb-4 text-center">Power Consumption Calculator</h1>
         <form method="POST" class="mb-6">

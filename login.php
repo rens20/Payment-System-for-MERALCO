@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . './../config/configuration.php');
-require_once(__DIR__ . './../config/validation.php');
+require_once(__DIR__ . '../config/configuration.php');
+require_once(__DIR__ . '../config/validation.php');
 session_start();
 
 //if user already account 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_type'] = $user['type'];
         
-   $redirect_url = '/../public/user.php';
+   $redirect_url = '/../public/power-consumption.php';
         header("Location: " . $redirect_url);
         exit();
     } else {
@@ -51,6 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Login</button>
+        <br>
+          <br>
+            <span class="mt-10 ml-4"> if you don't have account  <a class="text-blue-500" href="register.php">click here</a></span>
         </form>
     </div>
 </div>

@@ -4,9 +4,8 @@ require_once(__DIR__ . '../config/validation.php');
 session_start();
 
 
-//if user already account
 if (isset($_SESSION['user_id'])) {
-     $redirect_url = '/../public/user.php';
+     $redirect_url = '/../public/power-consumption.php';
         header("Location: " . $redirect_url);
         exit();
 }
@@ -21,7 +20,7 @@ $user_name = $_SESSION['user_name'];
 $user_type = $_SESSION['user_type'];
     
     Register($name,  $email, $password);
-     $redirect_url = 'login.php?id=' . $user['id'] . '&name=' . urlencode($user['name']);
+     $redirect_url = 'login.php';
         header("Location: " . $redirect_url);
     exit();
 }
@@ -57,6 +56,9 @@ $user_type = $_SESSION['user_type'];
                 <input type="password" name="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Register</button>
+          <br>
+          <br>
+            <span class="mt-10 ml-4"> if you have alrerady account <a class="text-blue-500" href="login.php">click here</a></span>
         </form>
     </div>
 </div>
