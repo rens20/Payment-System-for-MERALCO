@@ -73,19 +73,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Include SweetAlert library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+       <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body class="bg-gray-100 p-8">
-     <header class="bg-white shadow p-4 mb-8">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Power Consumption Calculator</h1>
-            <div>
-                <a href="transactions.php" class="text-blue-500 hover:underline mr-4">Transactions</a>
-                <form action="logout.php" method="POST" class="inline">
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</button>
-                </form>
-            </div>
+    <header class="bg-white shadow p-4 mb-8">
+    <div class="container mx-auto flex justify-between items-center">
+        <img src="./image/images.png" alt="Power Consumption Calculator" class="h-14 w-18 mr-5">
+        <div>
+            <a href="transactions.php" class="text font-bold   mr-4">Transactions</a>
+            <a href="information.php" class="text font-bold   mr-4">Help Support</a>
+            <form action="logout.php" method="POST" class="inline">
+                <button type="submit" class="bg text-white px-4 py-2 rounded ">Logout</button>
+            </form>
         </div>
-    </header>
+    </div>
+</header>
+
 
 </form>
 
@@ -94,13 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <form method="POST" class="mb-6">
             <div class="mb-4">
                 <label for="date" class="block text-gray-700">Date</label>
-                <input type="date" id="date" name="date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                <input type="date" id="date" name="date" class="w-full px-4 py-2 r rounded-lg " required>
             </div>
             <div class="mb-4">
                 <label for="consumption" class="block text-gray-700">Consumption (kWh)</label>
-                <input type="number" step="0.01" id="consumption" name="consumption" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                <input type="number" step="0.01" placeholder="Consumption (kWh)" id="consumption" name="consumption" class=" w-full px-4 py-2 rounded-lg" required>
             </div>
-            <button type="submit" name="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Generate</button>
+            <button type="submit" name="submit" class="w-full bg text-white px-4 py-2 rounded-lg ">Generate</button>
         </form>
     </div>
 </body>

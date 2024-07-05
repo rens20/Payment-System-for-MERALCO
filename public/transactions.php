@@ -22,15 +22,18 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+       <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body class="bg-gray-100 p-8">
     <header class="mb-8">
         <nav class="flex justify-between items-center bg-white p-4 rounded-lg shadow-lg">
-            <div class="text-lg font-bold">Power Consumption</div>
-            <div>
-                <a href="power-consumption.php" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Home</a>
+            <div class="container mx-auto flex justify-between items-center">
+        <img src="./image/images.png" alt="Power Consumption Calculator" class="h-14 w-18 mr-5">
+        <div>
+                <a href="power-consumption.php" class="bg text-white px-4 py-2 rounded-lg ">Home</a>
                 <form action="logout.php" method="POST" class="inline">
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Logout</button>
+                    <button type="submit" class="bg text-white px-4 py-2 rounded-lg ">Logout</button>
                 </form>
             </div>
         </nav>

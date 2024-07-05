@@ -1,0 +1,16 @@
+.text{
+    color:#ea580c;
+}
+.bg{
+    background-color: #ea580c;
+}
+input{
+border:1px solid #ea580c;
+}
+input:focus {
+    outline: none;
+    border-color:1px solid #ea580c;
+}
+.text{
+    color: #ea580c;
+}
